@@ -16,6 +16,11 @@ Assurez-vous de configurer les paramètres nécessaires, tels que la base de don
 
 ## Onglets de l'application
 
+
+### Reservations
+Gérez les reservations effectuées sur le site.
+Consulter les reservations effectuées par les utilisateurs.
+
 ### Ventes
 Gérez les ventes effectuées au verger.
 Ajoutez, modifiez et supprimez des ventes.
