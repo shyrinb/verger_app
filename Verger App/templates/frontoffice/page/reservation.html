@@ -1,0 +1,101 @@
+{% load static %}
+<script src="{% static 'script/reservation_client.js' %}" type="text/javascript"></script>
+<div class="container-fluid">
+    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Erreur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Impossible de supprimer cette reservation</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-white">
+        <div class="card-header card-color">
+            <p class="h2 text-center text-uppercase font-weight-bold pt-2">Reservations</p>
+        </div>
+        {% if user.status_utilisateur == "Client" %}
+        <form>
+            {% csrf_token %}
+            <div class="card-body container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <label for="nom">Nom : </label>
+                        <input class="form-control" type="text" id="nom" required> 
+                    </div>
+                    <div class="col-sm-6 mb-2">
+                        <label for="prenom">Prénom : </label>
+                        <input class="form-control" type="text" id="prenom" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <label for="type_produit">Produit: </label>
+                        <select class="form-control" id="produit" name="produit">
+                            {% for reservation in reservations %}
+                                <option value="{{ reservation.produit }}">{{ reservation.produit }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mb-2">
+                        <label for="quantite">Quantité : </label>
+                        <select class="form-control" id="quantite" required></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <label for="date_reservation">Date de Réservation: </label>
+                        <input class="form-control" type="date" id="date_reservation">
+                    </div>
+                    <div class="col-sm-6 mb-2">
+                        <label for="statut">Statut : </label>
+                        <select class="form-control" id="statut">
+                            <option value="En attente">En attente</option>
+                            <option value="Annulé">Annulé</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 mb-2">
+                        <input type="hidden" id="utilisateur" name="utilisateur" value="{{ request.user.id }}">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-outline-success mt-3 mb-3" id="btn" >Ajouter</button>
+            </div>
+        </div>
+
+        {% endif %}
+        <div class="row table-responsive m-auto rounded">
+            <table id="treservation" class="table table-hover w-100">
+                <thead>
+                    <tr class="text-uppercase bg-light w-100">
+                        <th scope="col">Id</th>
+                        <th scope="col">Utilisateur</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Date d'Achat</th>
+                        <th scope="col">Modifier</th>
+                    </tr>
+                </thead>
+                <tbody id="table-content">
+                    <!-- Add your Django template logic here to iterate over fournisseurs and display them -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>

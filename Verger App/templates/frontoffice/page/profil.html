@@ -1,0 +1,73 @@
+{% load static %}
+<script src="{% static 'script/profil.js' %}" type="text/javascript"></script>
+<div class="container-fluid">
+    <div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Erreur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Impossible de supprimer ce produit</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card bg-white">
+        <div class="card-header card-color">
+            <p class="h2 text-center text-uppercase font-weight-bold pt-2">Mon profil</p>
+        </div>
+        <form method="post" id="profil-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form-group">   Nom :
+                <input type="text" name="nom_client" id="id_nom_client" value="{{ form.nom_client }}" /> 
+                
+                {{ form.nom_client.errors }}
+            </div>
+        
+            <div class="form-group"> Prénom :
+                <input type="text" name="prenom" id="id_prenom" value="{{ form.prenom }}" /> 
+                
+                {{ form.prenom.errors }}
+            </div>
+        
+            <div class="form-group"> Num Téléphone:
+                <input type="text" name="telephone" id="id_telephone" value="{{ form.telephone }}" /> 
+                
+                {{ form.telephone.errors }}
+            </div>
+        
+            <div class="form-group"> Email:
+                <input type="text" name="email" id="id_email" value="{{ form.email }}" />
+                
+                {{ form.email.errors }}
+            </div>
+            <div class="form-group"> Adresse:
+                <input type="text" name="adresse_client" id="id_adresse_client" value="{{ form.adresse_client }}" />
+                
+                {{ form.adresse_client.errors }}
+            </div>
+            
+            <div class="form-group">Newsletter:
+                <select name="newsletter" id="id_newsletter">
+                    <option value="Oui" {% if form.newsletter == 'Oui' %}selected{% endif %}>Oui</option>
+                    <option value="Non" {% if form.newsletter == 'Non' %}selected{% endif %}>Non</option>
+                </select>
+                {{ form.newsletter.errors }}
+            </div>
+            
+
+
+            <input type="hidden" name="utilisateur_client" value="{{ request.user.id }}">
+
+            <button type="submit" class="btn btn-primary" id="btn_enregistrer" >Enregistrer</button>
+            <button type="button" class="btn btn-primary" id="btn_modifier">Modifier</button>
+        </form>
+    </div>
+</div>
