@@ -43,9 +43,9 @@ class CountViewSet(APIView):
         Fournisseur_count = Fournisseur.objects.all().count()
         Achat_count = AchatFournisseur.objects.all().count()
         Vente_count = VenteClient.objects.all().count()
-        Reservation_count=Reservation.objects.all().count()
+        Reservation_count= Reservation.objects.all().count()
         content = {
-            'produits_count': Produit_count,
+            'Produits_count': Produit_count,
             'Client_count':Client_count,
             'Fournisseur_count':Fournisseur_count,
             'Achat_count':Achat_count,

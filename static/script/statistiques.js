@@ -5,7 +5,7 @@ $(document).ready(function(){
 		data: {},
 		type: 'GET',
 		success : function(data){
-			$("#nbr-produits").html(data['produits_count']);
+			$("#nbr-produits").html(data['Produits_count']);
 			$("#nbr-clients").html(data['Client_count']);
 			$("#nbr-fournisseur").html(data['Fournisseur_count']);
 			$("#nbr-achat").html(data['Achat_count']);

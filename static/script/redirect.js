@@ -26,9 +26,9 @@ function chargeTab(tabName) {
     $('a:contains(<iclass="fas fa-bars"></i>)').show();
 
     if (tabName=== 'crm'){
-        $('a:contains(Clients), a:contains(Statistiques)').show();
+        $('a:contains(Clients),  a:contains(Fournisseurs),a:contains(Statistiques)').show();
     } else if(tabName=== 'gestionstocks'){
-        $('a:contains(Produits), a:contains(Reservation), a:contains(Fournisseurs), a:contains(Achats), a:contains(Ventes)').show();  
+        $('a:contains(Produits), a:contains(Reservation), a:contains(Achats), a:contains(Ventes)').show();  
     } else if (tabName === 'monprofil'){
         $('a:contains(Profil)').show();
     } else if (tabName === 'client'){

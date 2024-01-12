@@ -97,18 +97,11 @@ def save_client_profile(sender, instance, created, **kwargs):
 
 class Client(models.Model):
     utilisateur_client = models.OneToOneField(UtilisateurAPI, on_delete=models.CASCADE, default=1)  # Set a default value, you can adjust this as needed
-    nom_client = models.CharField(max_length=255,default='Unknown')
-    prenom = models.CharField(max_length=255,default='Unknown')
-    telephone = models.CharField(max_length=10,default='Unknown')
-    email = models.EmailField(default='Unknown')
-    adresse_client = models.TextField(default='Unknown')
-    achats = models.DecimalField(max_digits=10, decimal_places=2, default=0) # lien vers des ventes historique
-    derniere_date_achat = models.DateField(null=True, blank=True)
-    NEWSLETTER_CHOICES = [
-        ('Oui', 'oui'),
-        ('Non', 'non'),
-    ]
-    newsletter = models.CharField(max_length=3, choices=NEWSLETTER_CHOICES, default='Non')
+    nom_client = models.CharField(max_length=255,default='Unknown',blank=True)
+    prenom = models.CharField(max_length=255,default='Unknown',blank=True)
+    telephone = models.CharField(max_length=10,default='Unknown',blank=True)
+    email = models.EmailField(default='Unknown,',blank=True)
+    adresse_client = models.TextField(default='Unknown',blank=True)
 
     def __str__(self):
         return f"{self.nom_client} {self.prenom}"
@@ -133,12 +126,6 @@ class FournisseurProduit(models.Model):
     fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
     produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
 
-class Stocks(models.Model):
-    produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
-    quantite_entree = models.IntegerField(default=0)
-    quantite_sortie = models.IntegerField(default=0)
-    date_achat = models.DateField(default=timezone.now) 
-
 class AchatFournisseur(models.Model):
     prix = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE)
@@ -158,15 +145,6 @@ class VenteClient(models.Model):
         ('Especes', 'especes'),
     ]
     mode_paiement = models.CharField(max_length=50,choices=PAIEMENT_CHOICES)
-
-class VenteQuotidienne(models.Model):
-    date_achat = models.DateField(default=timezone.now) 
-    total_ventes = models.DecimalField(max_digits=10, decimal_places=2)
-
-class Depense(models.Model):
-    description = models.TextField(default='Unknown')
-    montant = models.DecimalField(max_digits=10, decimal_places=2)
-    date_achat = models.DateField(default=timezone.now) 
 
 class Reservation(models.Model):
     nom=models.CharField(max_length=255, default='Unknown')

@@ -26,10 +26,6 @@ class ProduitSerializer(serializers.ModelSerializer):
         model = Produit  # Replace with the actual name of your Produit model
         fields = ['id', 'nom']  # Include all required fields
 
-class StocksSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Stocks
-        fields = '__all__'
 
 class AchatFournisseurSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,17 +38,6 @@ class VenteClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = VenteClient
         fields = ['id', 'utilisateur_client_id', 'produit', 'quantite_vendue', 'total', 'date_vente', 'mode_paiement']
-
-class VenteQuotidienneSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = VenteQuotidienne
-        fields = '__all__'
-
-class DepenseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Depense
-        fields = '__all__'
-
 
 class ReservationSerializer(serializers.ModelSerializer):
     produit = ProduitSerializer()

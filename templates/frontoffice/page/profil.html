@@ -52,19 +52,9 @@
                 <input type="text" name="adresse_client" id="id_adresse_client" value="{{ form.adresse_client }}" />
                 
                 {{ form.adresse_client.errors }}
-            </div>
+            </div>     
             
-            <div class="form-group">Newsletter:
-                <select name="newsletter" id="id_newsletter">
-                    <option value="Oui" {% if form.newsletter == 'Oui' %}selected{% endif %}>Oui</option>
-                    <option value="Non" {% if form.newsletter == 'Non' %}selected{% endif %}>Non</option>
-                </select>
-                {{ form.newsletter.errors }}
-            </div>
-            
-
-
-            <input type="hidden" name="utilisateur_client" value="{{ request.user.id }}">
+            <input type="hidden" name="utilisateur_client" id="utilisateur_client" value="{{ request.user.id }}">
 
             <button type="submit" class="btn btn-primary" id="btn_enregistrer" >Enregistrer</button>
             <button type="button" class="btn btn-primary" id="btn_modifier">Modifier</button>

@@ -77,16 +77,6 @@ class LogoutView(TemplateView):
 
     return render(request, self.template_name)
 
-def produit_all(request):
-    names_from_db = Produit.objects.all()
-    context_dict = {'produits_from_context': names_from_db}
-    return render(request, 'frontoffice/produit_all.html', context_dict)
-
-
-def counts_all(request):
-    produits = Produit.objects.all().count()
-    return render(request, 'frontoffice/master_page.html', {'produits': produits})
-
 class UserInfoView(View):
     def get(self, request, *args, **kwargs):
         user_info = {
@@ -95,7 +85,6 @@ class UserInfoView(View):
         return JsonResponse(user_info)
     
 #---------------------------------------------------------
-    
     
 class ProfileView(View):
     template_name = 'frontoffice/page/profil.html'
@@ -108,23 +97,13 @@ class ProfileView(View):
             'telephone': client_instance.telephone,
             'email': client_instance.email,
             'adresse_client': client_instance.adresse_client,
-            'achats': client_instance.achats,
             'utilisateur_client_id': client_instance.utilisateur_client_id,
-            'newsletter': client_instance.newsletter
         }
-        print('Réponse de la vue Django :', response_data)
         return JsonResponse(response_data)
-    
-    def post(self, request, *args, **kwargs):
+
+    def put(self, request, *args, **kwargs):
         client_instance, created = Client.objects.get_or_create(utilisateur_client=request.user.utilisateurapi)
         form = ClientForm(request.POST, instance=client_instance)
-        
-        # Extraire la valeur de la newsletter du formulaire
-        newsletter_value = request.POST.get('newsletter', 'Non')  # 'Non' est la valeur par défaut si rien n'est sélectionné
-
-        # Mettre à jour la valeur de newsletter dans le modèle
-        client_instance.newsletter = newsletter_value
-
         if form.is_valid():
             form.save()
             # Utilisez JsonResponse pour renvoyer des données JSON
@@ -147,9 +126,6 @@ class ClientView(View):
                 'email': client.email,
                 'adresse_client': client.adresse_client,
                 'telephone': client.telephone,
-                'newsletter': client.newsletter,
-                'derniere_date_achat': client.derniere_date_achat,
-                'achats': client.achats,
             })
 
         return JsonResponse(client_data, safe=False)

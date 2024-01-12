@@ -8,9 +8,7 @@ from frontoffice.models import UtilisateurFront
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
-        fields = ['nom_client', 'prenom', 'telephone', 'email', 'adresse_client', 'achats', 'newsletter']
-
-    newsletter = forms.ChoiceField(choices=Client.NEWSLETTER_CHOICES)
+        fields = ['nom_client', 'prenom', 'telephone', 'email', 'adresse_client']
 
 class ReservationForm(forms.ModelForm):
     # Ajoutez ce champ caché
