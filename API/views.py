@@ -42,18 +42,14 @@ class CountViewSet(APIView):
         Client_count =  Client.objects.all().count()
         Fournisseur_count = Fournisseur.objects.all().count()
         Achat_count = AchatFournisseur.objects.all().count()
-
+        Vente_count = VenteClient.objects.all().count()
+        Reservation_count=Reservation.objects.all().count()
         content = {
             'produits_count': Produit_count,
             'Client_count':Client_count,
             'Fournisseur_count':Fournisseur_count,
-            'Achat_count':Achat_count
+            'Achat_count':Achat_count,
+            'Vente_count':Vente_count,
+            'Reservation_count':Reservation_count
         }
         return Response(content)
-
-
-class RiskViewSet(APIView):
-    def get(self, request, format=None):
-        countprod = request.GET.get('prodid', False)
-        prods = Produit.objects.filter(quantite__gt=0)
-        return Response(prods)
