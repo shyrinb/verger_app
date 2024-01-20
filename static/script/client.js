@@ -12,9 +12,6 @@ $(document).ready(function () {
             { data: "email" },
             { data: "adresse_client" },
             { data: "telephone" },
-            { data: "newsletter" },
-            { data: "derniere_date_achat" },
-            { data: "achats" },
             {
                 render: function () {
                     return '<button type="button" class="btn btn-outline-danger supprimer">Supprimer</button>';
